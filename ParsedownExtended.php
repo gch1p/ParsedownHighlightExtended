@@ -1,6 +1,6 @@
 <?php
 
-class ParsedownExtended extends ParsedownHighlight
+class ParsedownExtended extends gch1p\ParsedownHighlight
 {
     public const VERSION = '1.1';
     public const VERSION_PARSEDOWN_REQUIRED = '1.8';
