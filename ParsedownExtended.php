@@ -1,6 +1,8 @@
 <?php
 
-class ParsedownExtended extends gch1p\ParsedownHighlight
+use gch1p\ParsedownHighlight;
+
+class ParsedownExtended extends ParsedownHighlight
 {
     public const VERSION = '1.1';
     public const VERSION_PARSEDOWN_REQUIRED = '1.8';
@@ -143,12 +145,12 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
 
     /**
      * Parses the given markdown string to an HTML string but it leaves the ToC
-     * tag as is. It's an alias of the parent method "\DynamicParent::text()".
+     * tag as is. It's an alias of the parent method "\ParsedownHighlight::text()".
      */
     public function body($text): string
     {
         $text = $this->encodeTagToHash($text);  // Escapes ToC tag temporary
-        $html = DynamicParent::text($text);     // Parses the markdown text
+        $html = ParsedownHighlight::text($text);     // Parses the markdown text
 
         return $this->decodeTagFromHash($html); // Unescape the ToC tag
     }
@@ -231,7 +233,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
             $text
         );
 
-        return DynamicParent::inlineText($text);
+        return ParsedownHighlight::inlineText($text);
     }
 
     /**
@@ -246,7 +248,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
         $codeSnippets = $this->options['code']['inline'] ?? true;
         $codeMain = $this->options['code'] ?? true;
         if ($codeSnippets === true and $codeMain === true) {
-            return DynamicParent::inlineCode($excerpt);
+            return ParsedownHighlight::inlineCode($excerpt);
         }
     }
 
@@ -255,7 +257,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
         $mainState = $this->options['links'] ?? true;
         $state = $this->options['links']['email_links'] ?? true;
         if ($mainState and $state) {
-            return DynamicParent::inlineEmailTag($excerpt);
+            return ParsedownHighlight::inlineEmailTag($excerpt);
         }
     }
 
@@ -263,7 +265,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['emphasis'] ?? true;
         if ($state) {
-            return DynamicParent::inlineEmphasis($excerpt);
+            return ParsedownHighlight::inlineEmphasis($excerpt);
         }
     }
 
@@ -271,7 +273,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['images'] ?? true;
         if ($state) {
-            return DynamicParent::inlineImage($excerpt);
+            return ParsedownHighlight::inlineImage($excerpt);
         }
     }
 
@@ -279,7 +281,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['links'] ?? true;
         if ($state) {
-            return DynamicParent::inlineLink($excerpt);
+            return ParsedownHighlight::inlineLink($excerpt);
         }
     }
 
@@ -287,7 +289,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['markup'] ?? true;
         if ($state) {
-            return DynamicParent::inlineMarkup($excerpt);
+            return ParsedownHighlight::inlineMarkup($excerpt);
         }
     }
 
@@ -295,7 +297,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['strikethroughs'] ?? true;
         if ($state) {
-            return DynamicParent::inlineStrikethrough($excerpt);
+            return ParsedownHighlight::inlineStrikethrough($excerpt);
         }
     }
 
@@ -303,7 +305,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['links'] ?? true;
         if ($state) {
-            return DynamicParent::inlineUrl($excerpt);
+            return ParsedownHighlight::inlineUrl($excerpt);
         }
     }
 
@@ -311,7 +313,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['links'] ?? true;
         if ($state) {
-            return DynamicParent::inlineUrlTag($excerpt);
+            return ParsedownHighlight::inlineUrlTag($excerpt);
         }
     }
 
@@ -819,7 +821,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['footnotes'] ?? true;
         if ($state) {
-            return DynamicParent::blockFootnote($line);
+            return ParsedownHighlight::blockFootnote($line);
         }
     }
 
@@ -827,7 +829,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['definition_lists'] ?? true;
         if ($state) {
-            return DynamicParent::blockDefinitionList($line, $block);
+            return ParsedownHighlight::blockDefinitionList($line, $block);
         }
     }
 
@@ -836,7 +838,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
         $codeBlock = $this->options['code']['blocks'] ?? true;
         $codeMain = $this->options['code'] ?? true;
         if ($codeBlock === true and $codeMain === true) {
-            return DynamicParent::blockCode($line, $block);
+            return ParsedownHighlight::blockCode($line, $block);
         }
     }
 
@@ -844,7 +846,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['comments'] ?? true;
         if ($state) {
-            return DynamicParent::blockComment($line);
+            return ParsedownHighlight::blockComment($line);
         }
     }
 
@@ -855,7 +857,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
             return;
         }
 
-        $block = DynamicParent::blockHeader($line);
+        $block = ParsedownHighlight::blockHeader($line);
         if (!empty($block)) {
             // Get the text of the heading
             if (isset($block['element']['handler']['argument'])) {
@@ -903,7 +905,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['lists'] ?? true;
         if ($state) {
-            return DynamicParent::blockList($line, $CurrentBlock);
+            return ParsedownHighlight::blockList($line, $CurrentBlock);
         }
     }
 
@@ -911,7 +913,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['qoutes'] ?? true;
         if ($state) {
-            return DynamicParent::blockQuote($line);
+            return ParsedownHighlight::blockQuote($line);
         }
     }
 
@@ -919,7 +921,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['thematic_breaks'] ?? true;
         if ($state) {
-            return DynamicParent::blockRule($line);
+            return ParsedownHighlight::blockRule($line);
         }
     }
 
@@ -929,7 +931,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
         if (!$state) {
             return;
         }
-        $block = DynamicParent::blockSetextHeader($line, $block);
+        $block = ParsedownHighlight::blockSetextHeader($line, $block);
         if (!empty($block)) {
             // Get the text of the heading
             if (isset($block['element']['handler']['argument'])) {
@@ -978,7 +980,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['markup'] ?? true;
         if ($state) {
-            return DynamicParent::blockMarkup($line);
+            return ParsedownHighlight::blockMarkup($line);
         }
     }
 
@@ -986,7 +988,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['references'] ?? true;
         if ($state) {
-            return DynamicParent::blockReference($line);
+            return ParsedownHighlight::blockReference($line);
         }
     }
 
@@ -994,7 +996,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['tables'] ?? true;
         if ($state) {
-            return DynamicParent::blockTable($line, $block);
+            return ParsedownHighlight::blockTable($line, $block);
         }
     }
 
@@ -1011,7 +1013,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
             }
 
             if ($allowCustomAbbr == true) {
-                return DynamicParent::blockAbbreviation($line);
+                return ParsedownHighlight::blockAbbreviation($line);
             }
 
             return;
@@ -1096,7 +1098,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
         if ($codeBlock === false or $codeMain === false) {
             return;
         }
-        $block = DynamicParent::blockFencedCode($line);
+        $block = ParsedownHighlight::blockFencedCode($line);
 
         $marker = $line['text'][0];
         $openerLength = strspn($line['text'], $marker);
@@ -1341,7 +1343,7 @@ class ParsedownExtended extends gch1p\ParsedownHighlight
     {
         $state = $this->options['special_attributes'] ?? true;
         if ($state) {
-            return DynamicParent::parseAttributeData($attributeString);
+            return ParsedownHighlight::parseAttributeData($attributeString);
         }
 
         return [];
