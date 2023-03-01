@@ -1,13 +1,13 @@
 {
-  "name": "benjaminhoegh/parsedown-extended",
-  "description": "An extension for Parsedown.",
+  "name": "gch1p/parsedown-highlight-extended",
+  "description": "An extension for ParsedownHighlight.",
   "keywords": [
     "markdown",
     "markdown extended",
     "parsedown",
     "parsedown extended"
   ],
-  "homepage": "https://github.com/benjaminhoegh/parsedown-extended",
+  "homepage": "https://github.com/gch1p/ParsedownHighlightExtended",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -18,12 +18,19 @@
   ],
   "require": {
     "php": ">=7.2",
+    "gch1p/parsedown-highlight": "master",
     "erusev/parsedown": "^1.8-beta-6",
     "erusev/parsedown-extra": "^0.8.0"
   },
   "config": {
-      "sort-packages": true
+    "sort-packages": true
   },
+  "repositories": [
+    {
+      "url": "https://github.com/gch1p/parsedown-highlight",
+      "type": "git"
+    }
+  ],
   "autoload": {
     "psr-0": {
       "ParsedownExtended": ""

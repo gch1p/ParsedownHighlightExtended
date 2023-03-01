@@ -1,23 +1,6 @@
 <?php
 
-if (class_exists('ParsedownExtra')) {
-    class DynamicParent extends \ParsedownExtra
-    {
-        public function __construct()
-        {
-            parent::__construct();
-        }
-    }
-} else {
-    class DynamicParent extends \Parsedown
-    {
-        public function __construct()
-        {
-        }
-    }
-}
-
-class ParsedownExtended extends DynamicParent
+class ParsedownExtended extends ParsedownHighlight
 {
     public const VERSION = '1.1';
     public const VERSION_PARSEDOWN_REQUIRED = '1.8';
